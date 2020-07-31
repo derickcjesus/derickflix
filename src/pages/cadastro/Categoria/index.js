@@ -27,7 +27,10 @@ function CadastroCategoria() {
   useEffect(() => {
     console.log('fala rapaziada');
 
-    const url = 'http://localhost:8080/categorias';
+    const url = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://derickflix.herokuapp.com/';
+
     fetch(url)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
@@ -35,24 +38,6 @@ function CadastroCategoria() {
           ...resposta,
         ]);
       });
-
-    // setTimeout(() => {
-    //   setCategorias([
-    //     ...categorias,
-    //     {
-    //       id: 1,
-    //       nome: 'Front-end',
-    //       descricao: 'descricao show',
-    //       cor: '#fff',
-    //     },
-    //     {
-    //       id: 2,
-    //       nome: 'Back-end',
-    //       descricao: 'Outra descricao show',
-    //       cor: '#fff',
-    //     },
-    //   ]);
-    // }, 4 * 1000);
   }, []);
 
   return (
